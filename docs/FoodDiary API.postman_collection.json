@@ -147,7 +147,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"еда\",\r\n    \"date\": \"2025-03-03\",\r\n    \"dishIds\": [1, 1]\r\n}",
+					"raw": "{\r\n    \"name\": \"еда\",\r\n    \"date\": \"2025-03-03\",\r\n    \"dishIds\": [1, 1] // указать айди блюд, получить из getDishes запроса\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
