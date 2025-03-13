@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres4
+    username: postgres
+    password: user
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      format_sql: true
+logging:
+  level:
+    root: INFO
+    org.springframework: DEBUG
+    com.myapp: TRACE
+
+

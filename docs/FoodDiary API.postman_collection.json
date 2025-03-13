@@ -1,0 +1,561 @@
+{
+	"info": {
+		"_postman_id": "c3f28a33-d60b-4a97-86b3-61472323014e",
+		"name": "FoodDiary API",
+		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33972612"
+	},
+	"item": [
+		{
+			"name": "registerUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"testuser\",\n    \"email\": \"test@gmail.com\",\n    \"age\": 33,\n    \"weight\": 66,\n    \"height\": 180,\n    \"aim\": \"weight_gain\", // Возможные значения: WEIGHT_LOSS, MAINTENANCE, WEIGHT_GAIN\n    \"gender\": \"male\", //Возможные значения: FEMALE, MALE\n    \"activity\": \"HIGH\", // Возможные значения: LOW, MEDIUM, HIGH, VERY_HIGH\n    \"password\": \"Test1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/register",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"register"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": [
+				{
+					"name": "registerUserExample",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Daria\", \n    \"email\": \"daria@gmail.com\",\n    \"age\": 24, \n    \"weight\": 59, \n    \"height\": 173, \n    \"aim\": \"weight_gain\", // Возможные значения: WEIGHT_LOSS, MAINTENANCE, WEIGHT_GAIN\n    \"gender\": \"Female\", //Возможные значения: FEMALE, MALE\n    \"activity\": \"HdIGH\", // Возможные значения: LOW, MEDIUM, HIGH, VERY_HIGH\n    \"password\": \"Test1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/registerUser",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"registerUser"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"status\": \"SUCCESS\",\r\n    \"data\": \"Вы успешно зарегестрированы. Ваша суточная норма калорий 2451\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "createDish",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"творог\",\r\n    \"calories\": 180, \r\n    \"protein\": 20, \r\n    \"fats\": 5, \r\n    \"carbs\": 6\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/createdish",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"createdish"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "createDishExample",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"конфета\",\r\n    \"calories\": 180, \r\n    \"protein\": 20, \r\n    \"fats\": 5, \r\n    \"carbs\": 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/createdish",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"createdish"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"status\": \"SUCCESS\",\r\n    \"data\": \"Блюдо 'творог' успешно добавлено.\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "createMeal",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"еда\",\r\n    \"date\": \"2025-03-03\",\r\n    \"dishIds\": [1, 1]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/createmeal",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"createmeal"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "createMealExample",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"обед\",\r\n    \"date\": \"2025-03-03\",\r\n    \"dishIds\": [1, 1]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/createmeal",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"createmeal"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"status\": \"SUCCESS\",\r\n    \"data\": \"Прием пищи 'еда' успешно добавлен\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "getDailyReport",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1IiwiaWF0IjoxNzQxNTUwMzc2LCJleHAiOjE3NDE1NTkwMTZ9.teNUgrnlXjI2b9UEXBzvMA1_tqbF_EaJDEYfho_Y539nyEwBmtGfcszu-3em3o22BEiXlZl1aSWVZTu-t8w7GA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/getDailyReport?date=2025-03-03",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"getDailyReport"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "date",
+							"value": "2025-03-03"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getDailyReportExample",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/getDailyReport?date=2025-03-06",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getDailyReport"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2025-03-06"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"date\": \"2025-03-03\",\r\n    \"meals\": [\r\n        {\r\n            \"name\": \"перекус\",\r\n            \"dishes\": [\r\n                {\r\n                    \"name\": \"морковь\",\r\n                    \"calories\": 180,\r\n                    \"protein\": 20,\r\n                    \"fats\": 5,\r\n                    \"carbs\": 6\r\n                },\r\n                {\r\n                    \"name\": \"суп\",\r\n                    \"calories\": 180,\r\n                    \"protein\": 20,\r\n                    \"fats\": 5,\r\n                    \"carbs\": 6\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"name\": \"обед\",\r\n            \"dishes\": [\r\n                {\r\n                    \"name\": \"морковь\",\r\n                    \"calories\": 180,\r\n                    \"protein\": 20,\r\n                    \"fats\": 5,\r\n                    \"carbs\": 6\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"totalCalories\": 540,\r\n    \"totalProtein\": 60,\r\n    \"totalFats\": 15,\r\n    \"totalCarbs\": 18,\r\n    \"calorieConsumption\": \"Норма калорий не превышена.\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "getMealHistory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/getMealHistory?startdate=2025-03-&enddate=2025-03-03",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"getMealHistory"
+					],
+					"query": [
+						{
+							"key": "startdate",
+							"value": "2025-03-",
+							"description": "дата начала ответа, формат yyyy-mm-dd"
+						},
+						{
+							"key": "enddate",
+							"value": "2025-03-03",
+							"description": "дата конца отчета, формат yyyy-mm-dd"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getMealHistoryExample",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/getMealHistory?userId=5&startdate=2025-03-03&enddate=2025-03-03",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"getMealHistory"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "5"
+								},
+								{
+									"key": "startdate",
+									"value": "2025-03-03"
+								},
+								{
+									"key": "enddate",
+									"value": "2025-03-03"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"dailyReportObjects\": [\r\n        {\r\n            \"date\": \"2025-03-03\",\r\n            \"meals\": [\r\n                {\r\n                    \"name\": \"перекус\",\r\n                    \"dishes\": [\r\n                        {\r\n                            \"name\": \"морковь\",\r\n                            \"calories\": 180,\r\n                            \"protein\": 20,\r\n                            \"fats\": 5,\r\n                            \"carbs\": 6\r\n                        },\r\n                        {\r\n                            \"name\": \"суп\",\r\n                            \"calories\": 180,\r\n                            \"protein\": 20,\r\n                            \"fats\": 5,\r\n                            \"carbs\": 6\r\n                        }\r\n                    ]\r\n                },\r\n                {\r\n                    \"name\": \"обед\",\r\n                    \"dishes\": [\r\n                        {\r\n                            \"name\": \"морковь\",\r\n                            \"calories\": 180,\r\n                            \"protein\": 20,\r\n                            \"fats\": 5,\r\n                            \"carbs\": 6\r\n                        }\r\n                    ]\r\n                }\r\n            ],\r\n            \"totalCalories\": 540,\r\n            \"totalProtein\": 60,\r\n            \"totalFats\": 15,\r\n            \"totalCarbs\": 18,\r\n            \"calorieConsumption\": \"Норма калорий не превышена.\"\r\n        }\r\n    ]\r\n}"
+				}
+			]
+		},
+		{
+			"name": "downloadReport",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/downloadReport?type=csм",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"downloadReport"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "csм",
+							"description": "формат отчера, допустимые значения CSV, PDF"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "downloadReportExample",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/downloadReport?type=pdf",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"downloadReport"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "pdf",
+									"description": "Возможные значения pdf/csv"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"status\": \"SUCCESS\",\r\n    \"data\": \"PDF-отчет сохранен в C:\\\\Users\\\\dfesenko\\\\IdeaProjects\\\\foodDiary\\\\отчет_по_питанию.pdf\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"daria@gmail.com\", \r\n    \"password\": \"Test1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "LoginExample",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"dariad@gmail.com\", \r\n    \"password\": \"Test1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"status\": \"SUCCESS\",\r\n    \"data\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1IiwiaWF0IjoxNzQxNTUwMzc2LCJleHAiOjE3NDE1NTkwMTZ9.teNUgrnlXjI2b9UEXBzvMA1_tqbF_EaJDEYfho_Y539nyEwBmtGfcszu-3em3o22BEiXlZl1aSWVZTu-t8w7GA\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "GetDishes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/getDishes",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"getDishes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GetDishesExample",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8080/getDishes",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"getDishes"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1IiwiaWF0IjoxNzQxNjEwNjEzLCJleHAiOjE3NDE2MTkyNTN9.6TPw4kSxYu3XKfeiV0q9dnK4U8Qi3e_c6rFTdEF_hzMLMFzD1wRoy5YgSy3MqwIjxlc0Ew7KD301H7Zj_9ey2w",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8080"
+		}
+	]
+}
